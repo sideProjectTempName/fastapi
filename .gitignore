@@ -1,0 +1,58 @@
+# 🐍 Python 관련 기본 파일들
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# 📦 가상환경 관련
+venv/
+env/
+*.env
+*.venv
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# 🚀 FastAPI 실행 시 생성되는 파일
+instance/
+*.log
+logs/
+*.pid
+*.db
+*.sqlite3
+
+# 🏗️ IDE 관련 파일
+.vscode/
+.idea/
+*.iml
+
+# 🔥 운영 환경 설정 (보안)
+.env
+.env.local
+.env.production
+.env.test
+config.json
+secrets.json
+
+# 📦 의존성 캐시 파일
+*.egg-info/
+.eggs/
+dist/
+build/
+pip-wheel-metadata/
+
+# 🚀 Uvicorn 실행 로그
+uvicorn.log
+
+# 📝 Jupyter Notebook 캐시
+.ipynb_checkpoints/
+
+# 📸 미디어 파일 (예: 업로드된 이미지 등)
+media/
+uploads/
+
+# 🚀 Docker 관련
+.dockerignore
+Dockerfile
+docker-compose.yml
