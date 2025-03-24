@@ -24,7 +24,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 4. .env 파일 생성<br/>
-루트 폴더에 ```".env"``` 파일을 생성하고 다음 설정을 해줍니다.
+루트 폴더에 ```.env``` 파일을 생성하고 다음 설정을 해줍니다.
 ```python
 # 데이터베이스 설정
 DB_HOST=localhost
