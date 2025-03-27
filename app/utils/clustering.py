@@ -72,11 +72,20 @@ def optimize_schedule(spots: List[TravelSpot], days: int) -> Dict[str, List[Trav
         
         # 관광지와 식당 번갈아 배치
         day_schedule = []
-        while optimized_tourist_spots or optimized_restaurants:
-            if optimized_tourist_spots:
-                day_schedule.append(optimized_tourist_spots.pop(0))
-            if optimized_restaurants:
-                day_schedule.append(optimized_restaurants.pop(0))
+        tourist_index = 0
+        restaurant_index = 0
+        
+        while tourist_index < len(optimized_tourist_spots) or restaurant_index < len(optimized_restaurants):
+            # 관광지 2개 추가
+            for _ in range(2):
+                if tourist_index < len(optimized_tourist_spots):
+                    day_schedule.append(optimized_tourist_spots[tourist_index])
+                    tourist_index += 1
+                    
+            # 식당 1개 추가 (가능한 경우)
+            if restaurant_index < len(optimized_restaurants):
+                day_schedule.append(optimized_restaurants[restaurant_index])
+                restaurant_index += 1
         
         schedule[f"day_{day}"] = day_schedule
         

@@ -7,7 +7,7 @@ from typing import List
 def get_tourist_spots_query(category_patterns: List[str]) -> str:
     """관광지와 음식점 데이터를 가져오는 쿼리"""
     like_conditions = " OR ".join(["c.category_code LIKE %s" for _ in category_patterns])
-    
+    # 음식점에서 'A05020900'과 'A05021000'은 제외 (카페,클럽)
     return f"""
         SELECT 
             d.destination_id,
@@ -28,7 +28,10 @@ def get_tourist_spots_query(category_patterns: List[str]) -> str:
         JOIN address a ON d.address_id = a.address_id
         WHERE a.area_code = %s
         AND a.sigungu_code = %s
-        AND ({like_conditions})
+        AND ({like_conditions}
+            OR c.category_code LIKE 'A0502%%'
+            AND c.category_code NOT IN ('A05020900', 'A05021000') 
+            )
         AND d.latitude IS NOT NULL 
         AND d.longitude IS NOT NULL
         ORDER BY RANDOM();
