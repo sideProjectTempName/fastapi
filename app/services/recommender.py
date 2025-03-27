@@ -88,7 +88,7 @@ class TourAPIRecommender:
             try:
                 max_restaurants_per_day = settings.MAX_RESTAURANTS_PER_DAY
                 
-                schedule = optimize_schedule(tourist_spots + restaurants, days)
+                schedule = optimize_schedule(tourist_spots + restaurants, days) or {}
                 
             except Exception as e:
                 logger.error(f"일정 최적화 중 오류 발생: {str(e)}")
