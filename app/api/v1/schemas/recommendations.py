@@ -52,7 +52,7 @@ class CategoryHierarchy(BaseModel):
 
 class TravelRecommendationRequest(BaseModel):
     area_code: str = Field(..., description="지역 코드 (예: 32)")
-    sigungu_code: str = Field(..., description="시군구 코드 (예: 1)")
+    sigungu_code: Optional[str] = Field(None, description="시군구 코드 (예: 강남구-1, 전체-None)gi")
     category_codes: List[str] = Field(..., description="카테고리 코드 목록 (예: ['A01', 'A05'])")
     days: int = Field(..., ge=1, le=7, description="여행 일수 (1-7일)")
     
