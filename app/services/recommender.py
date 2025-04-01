@@ -13,7 +13,7 @@ class TourAPIRecommender:
     def get_travel_recommendations(
         self,
         area_code: str,
-        sigungu_code: str,
+        sigungu_code: Optional[str],
         category_codes: List[str],
         days: int
     ) -> Dict:
@@ -33,7 +33,8 @@ class TourAPIRecommender:
         
         try:
             # 1. 관광지와 음식점 데이터 가져오기
-            
+            # 시군구 코드가 None이면 전체 지역을 대상으로 함
+            include_sigungu = sigungu_code is not None
             if not category_codes or len(category_codes) < 2:
                 raise ValueError("카테고리 코드를 두 개 이상 지정해주세요.")
                 
@@ -42,8 +43,11 @@ class TourAPIRecommender:
             logger.info(f"Category patterns: {category_patterns}") 
             
             # 데이터 가져오기
-            tourist_spots_query = get_tourist_spots_query(category_patterns)
-            query_params = [area_code, sigungu_code] + category_patterns
+            tourist_spots_query = get_tourist_spots_query(category_patterns,include_sigungu)
+            query_params = [area_code]
+            if include_sigungu:
+                query_params.append(sigungu_code)
+            query_params += category_patterns
             logger.info(f"Query: {tourist_spots_query}")
             logger.info(f"Query parameters: {query_params}") 
             cursor.execute(tourist_spots_query, query_params)

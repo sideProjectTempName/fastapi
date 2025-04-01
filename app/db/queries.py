@@ -4,9 +4,10 @@
 
 from typing import List
 
-def get_tourist_spots_query(category_patterns: List[str]) -> str:
+def get_tourist_spots_query(category_patterns: List[str], include_sigungu:bool) -> str:
     """관광지와 음식점 데이터를 가져오는 쿼리"""
     like_conditions = " OR ".join(["c.category_code LIKE %s" for _ in category_patterns])
+    sigungu_condition = "AND a.sigungu_code = %s" if include_sigungu else ""
     # 음식점에서 'A05020900'과 'A05021000'은 제외 (카페,클럽)
     return f"""
         SELECT 
@@ -27,7 +28,7 @@ def get_tourist_spots_query(category_patterns: List[str]) -> str:
         JOIN category c ON d.category_id = c.category_id
         JOIN address a ON d.address_id = a.address_id
         WHERE a.area_code = %s
-        AND a.sigungu_code = %s
+        {sigungu_condition}
         AND ({like_conditions}
             OR c.category_code LIKE 'A0502%%'
             AND c.category_code NOT IN ('A05020900', 'A05021000') 

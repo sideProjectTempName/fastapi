@@ -21,9 +21,10 @@ async def get_travel_recommendations(request: TravelRecommendationRequest):
         TravelSchedule: 일자별 추천 여행지 및 숙박시설
     """
     try:
+        sigungu_code = request.sigungu_code if request.sigungu_code != "" else None
         return recommender.get_travel_recommendations(
             area_code=request.area_code,
-            sigungu_code=request.sigungu_code,
+            sigungu_code=sigungu_code,
             category_codes=request.category_codes,
             days=request.days,
         )
