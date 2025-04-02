@@ -43,6 +43,7 @@ class DailySchedule(BaseModel):
 class TravelSchedule(BaseModel):
     schedule: dict[str, DailySchedule]
     message: str
+    area_code: str
 
 class CategoryHierarchy(BaseModel):
     category_code: str
