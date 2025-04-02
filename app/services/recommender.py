@@ -166,7 +166,8 @@ class TourAPIRecommender:
 
             return {
                 "schedule": final_schedule,
-                "message": "여행 일정이 성공적으로 생성되었습니다."
+                "message": "여행 일정이 성공적으로 생성되었습니다.",
+                "area_code": area_code
             }
 
         except Exception as e:
